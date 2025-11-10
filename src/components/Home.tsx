@@ -17,7 +17,7 @@ export function Home({ theme, scrollToSection }: HomeProps) {
         className={`absolute inset-0 ${
           theme === 'dark' 
             ? 'bg-gradient-to-br from-blue-950/20 via-transparent to-purple-950/20' 
-            : 'bg-gradient-to-br from-blue-50 via-transparent to-purple-50'
+            : 'bg-gradient-to-br from-blue-100 via-transparent to-purple-100'
         }`}
         animate={{
           background: theme === 'dark'
@@ -27,9 +27,9 @@ export function Home({ theme, scrollToSection }: HomeProps) {
                 'linear-gradient(to bottom right, rgba(23, 37, 84, 0.2), transparent, rgba(88, 28, 135, 0.2))',
               ]
             : [
-                'linear-gradient(to bottom right, rgba(239, 246, 255, 1), transparent, rgba(250, 245, 255, 1))',
-                'linear-gradient(to bottom right, rgba(250, 245, 255, 1), transparent, rgba(239, 246, 255, 1))',
-                'linear-gradient(to bottom right, rgba(239, 246, 255, 1), transparent, rgba(250, 245, 255, 1))',
+                'linear-gradient(to bottom right, rgba(219, 234, 254, 1), transparent, rgba(243, 232, 255, 1))',
+                'linear-gradient(to bottom right, rgba(243, 232, 255, 1), transparent, rgba(219, 234, 254, 1))',
+                'linear-gradient(to bottom right, rgba(219, 234, 254, 1), transparent, rgba(243, 232, 255, 1))',
               ]
         }}
         transition={{
