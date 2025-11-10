@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Github, Linkedin, Twitter, FileText } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
@@ -8,11 +9,6 @@ interface HomeProps {
 }
 
 export function Home({ theme, scrollToSection }: HomeProps) {
-  const handleResumeClick = () => {
-    // Open the resume from the public directory in a new tab
-    const newWindow = window.open('/Resume.pdf', '_blank');
-    if (newWindow) newWindow.opener = null;
-  };
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -167,7 +163,7 @@ export function Home({ theme, scrollToSection }: HomeProps) {
             theme === 'dark' ? 'shadow-2xl shadow-blue-500/10' : 'shadow-2xl shadow-blue-500/20'
           }`}>
             <ImageWithFallback
-              src="https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1287"
+              src="https://images.unsplash.com/photo-1762368229295-81f2742fb8a5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1287"
               alt="Arsalan - Developer"
               className="w-full h-full object-cover"
             />
@@ -178,9 +174,11 @@ export function Home({ theme, scrollToSection }: HomeProps) {
             }`} />
           </div>
 
-          {/* Floating Resume Badge */}
-          <motion.button
-            onClick={handleResumeClick}
+          {/* Floating Resume Badge (opens directly to avoid popup blockers) */}
+          <motion.a
+            href="/Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{ scale: 1.05 }}
@@ -201,7 +199,7 @@ export function Home({ theme, scrollToSection }: HomeProps) {
             <p className={`font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'} group-hover:underline`}>
               Resume
             </p>
-          </motion.button>
+          </motion.a>
         </motion.div>
       </div>
     </section>
