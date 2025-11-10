@@ -107,9 +107,9 @@ export function About({ theme }: AboutProps) {
     },
     {
       title: 'Education',
-      Name: 'Burn Hall School',
+      company: 'Burn Hall School',
       period: '2012 - 2024',
-      description: 'Completed my education from elementary to high school at Burn Sall School.'
+      description: 'Completed my education from elementary to high school at Burn Hall School, Srinagar, J&K.'
     }
   ];
 

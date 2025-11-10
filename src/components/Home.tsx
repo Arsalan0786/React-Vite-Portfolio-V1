@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Github, Linkedin, Twitter, FileText } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import resumePdf from '../Resume.pdf';
 
 interface HomeProps {
   theme: 'light' | 'dark';
