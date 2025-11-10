@@ -10,7 +10,7 @@ interface HomeProps {
 export function Home({ theme, scrollToSection }: HomeProps) {
   const handleResumeClick = () => {
     // Replace this URL with your actual resume PDF URL
-    window.open('/Updated CV.pdf', '_blank');
+    window.open('/Resume.pdf', '_blank');
   };
 
   return (
