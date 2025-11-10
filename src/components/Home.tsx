@@ -1,7 +1,6 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Github, Linkedin, Twitter, FileText } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import resumePdf from '../Resume.pdf';
 
 interface HomeProps {
   theme: 'light' | 'dark';
@@ -10,8 +9,9 @@ interface HomeProps {
 
 export function Home({ theme, scrollToSection }: HomeProps) {
   const handleResumeClick = () => {
-    // Replace this URL with your actual resume PDF URL
-    window.open('/Resume.pdf', '_blank');
+    // Open the resume from the public directory in a new tab
+    const newWindow = window.open('/Resume.pdf', '_blank');
+    if (newWindow) newWindow.opener = null;
   };
 
   return (
