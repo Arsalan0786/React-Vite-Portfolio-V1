@@ -94,8 +94,8 @@ export function About({ theme }: AboutProps) {
 
   const experiences = [
     {
-      title: 'Bachelor in Computer Science',
-      Name: 'Lovely Professional University',
+      title: 'Bachelor of Technology in Computer Science',
+      company: 'Lovely Professional University',
       period: '2024 - 2028',
       description: 'Specialized in Artificial Intelligence, Machine Learning and Software Engineering.'
     },
