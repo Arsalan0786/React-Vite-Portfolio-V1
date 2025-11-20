@@ -142,7 +142,7 @@ export function About({ theme }: AboutProps) {
       image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwbWFjaGluZSUyMGxlYXJuaW5nfGVufDF8fHx8MTc2MjQwOTA3NHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
       date: 'October 2024',
       category: 'Technology',
-      mediumUrl: 'https://medium.com/@sheikharsalan8146'
+      mediumUrl: 'https://medium.com/@sheikharsalan8146/ai-machine-learning-a-beginners-guide-in-simple-human-non-techy-terms-c6cdc07affbf'
     }
   ];
 
