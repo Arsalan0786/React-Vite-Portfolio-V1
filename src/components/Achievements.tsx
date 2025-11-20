@@ -97,7 +97,9 @@ export function Achievements({ theme }: AchievementProps) {
     <section
       id="achievements"
       className={`min-h-screen py-20 px-6 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-zinc-950' : 'bg-white'
+        theme === 'dark'
+          ? 'bg-gradient-to-b from-zinc-900 via-zinc-950/80 to-zinc-900'
+          : 'bg-gradient-to-b from-zinc-50 via-white to-zinc-50'
       }`}
     >
       <div className="max-w-7xl mx-auto">

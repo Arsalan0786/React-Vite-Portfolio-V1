@@ -1,11 +1,13 @@
 import { motion } from 'motion/react';
-import { Code2, Dumbbell, GraduationCap, Briefcase, ExternalLink, Instagram, Database, Server, GitBranch, Palette, Container } from 'lucide-react';
+import { Code2, Dumbbell, GraduationCap, Briefcase, ExternalLink, Instagram, Database, Server, GitBranch, Palette, Container, BookOpen } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { SkillPill } from './SkillPill';
 import { ProjectCard } from './ProjectCard';
 import { ExperienceTimeline } from './ExperienceTimeline';
 import { FitnessCarousel } from './FitnessCarousel';
 import { ProjectModal } from './ProjectModal';
+import { BlogModal } from './BlogModal';
+import { Achievements } from './Achievements';
 import { useState } from 'react';
 
 interface AboutProps {
@@ -14,6 +16,7 @@ interface AboutProps {
 
 export function About({ theme }: AboutProps) {
   const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedBlog, setSelectedBlog] = useState<any>(null);
 
   const allSkills = [
     'JavaScript',
@@ -113,6 +116,36 @@ export function About({ theme }: AboutProps) {
     }
   ];
 
+  const blogs = [
+    {
+      title: 'Building Modern Web Applications with React',
+      description: 'Exploring the latest trends and best practices in React development.',
+      preview: 'In this comprehensive guide, I dive deep into modern React development practices, covering everything from hooks and context to performance optimization and state management. Learn how to build scalable applications that stand the test of time.',
+      image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZWFjdCUyMGNvZGUlMjBkZXZlbG9wbWVudHxlbnwxfHx8fDE3NjI0MDkwNzR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      date: 'December 2024',
+      category: 'Web Development',
+      mediumUrl: 'https://medium.com/@sheikharsalan8146'
+    },
+    {
+      title: 'The Journey from Zero to Fitness Hero',
+      description: 'My personal transformation story and lessons learned along the way.',
+      preview: 'Join me as I share my incredible fitness journey from being completely out of shape to achieving peak physical condition. This story covers the mental challenges, the physical transformations, and the key principles that made it all possible. Discover how discipline, consistency, and the right mindset can change your life.',
+      image: 'https://images.unsplash.com/photo-1750698544932-c7471990f1ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXRuZXNzJTIwd29ya291dCUyMGd5bXxlbnwxfHx8fDE3NjIzNjE1NzV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      date: 'November 2024',
+      category: 'Fitness & Lifestyle',
+      mediumUrl: 'https://medium.com/@sheikharsalan8146'
+    },
+    {
+      title: 'AI and Machine Learning: A Beginner\'s Guide',
+      description: 'Understanding the fundamentals of AI and how to get started.',
+      preview: 'Artificial Intelligence and Machine Learning are transforming the world as we know it. In this beginner-friendly guide, I break down complex concepts into digestible pieces, explain the difference between AI and ML, and provide practical steps to start your journey in this exciting field. Perfect for developers and enthusiasts alike.',
+      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwbWFjaGluZSUyMGxlYXJuaW5nfGVufDF8fHx8MTc2MjQwOTA3NHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      date: 'October 2024',
+      category: 'Technology',
+      mediumUrl: 'https://medium.com/@sheikharsalan8146'
+    }
+  ];
+
   return (
     <section id="about" className={`min-h-screen py-20 px-6 ${
       theme === 'dark' ? 'bg-zinc-900' : 'bg-zinc-50'
@@ -191,6 +224,85 @@ export function About({ theme }: AboutProps) {
           </div>
         </motion.div>
 
+        {/* Achievements Section (moved here under Featured Projects) */}
+        <Achievements theme={theme} />
+
+        {/* Blog Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center gap-3 mb-8">
+            <BookOpen className={theme === 'dark' ? 'text-blue-400' : 'text-blue-600'} size={28} />
+            <h3 className="text-3xl">Latest Blog Posts</h3>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {blogs.map((blog, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className={`group cursor-pointer rounded-xl overflow-hidden transition-all ${
+                  theme === 'dark'
+                    ? 'bg-zinc-800 border border-zinc-700 hover:border-zinc-600'
+                    : 'bg-white border border-zinc-200 hover:border-zinc-300'
+                } hover:shadow-lg`}
+                onClick={() => setSelectedBlog(blog)}
+              >
+                {/* Blog Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <ImageWithFallback
+                    src={blog.image}
+                    alt={blog.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-medium ${
+                    theme === 'dark'
+                      ? 'bg-blue-500/20 text-blue-400 backdrop-blur-sm'
+                      : 'bg-blue-100 text-blue-700'
+                  }`}>
+                    {blog.category}
+                  </div>
+                </div>
+
+                {/* Blog Content */}
+                <div className="p-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className={`text-xs ${
+                      theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+                    }`}>
+                      {blog.date}
+                    </span>
+                  </div>
+                  <h4 className={`text-xl font-semibold mb-2 ${
+                    theme === 'dark' ? 'text-white' : 'text-zinc-900'
+                  }`}>
+                    {blog.title}
+                  </h4>
+                  <p className={`text-sm mb-4 line-clamp-2 ${
+                    theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+                  }`}>
+                    {blog.description}
+                  </p>
+                  <button
+                    className={`text-sm font-medium transition-colors ${
+                      theme === 'dark'
+                        ? 'text-blue-400 hover:text-blue-300'
+                        : 'text-blue-600 hover:text-blue-700'
+                    }`}
+                  >
+                    Read More →
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
         {/* Fitness & Coaching Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -258,6 +370,14 @@ export function About({ theme }: AboutProps) {
           isOpen={selectedProject !== null}
           theme={theme}
           onClose={() => setSelectedProject(null)}
+        />
+      )}
+      {selectedBlog && (
+        <BlogModal
+          blog={selectedBlog}
+          isOpen={selectedBlog !== null}
+          theme={theme}
+          onClose={() => setSelectedBlog(null)}
         />
       )}
     </section>

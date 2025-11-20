@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Home } from "./components/Home";
 import { About } from "./components/About";
-import { Achievements } from "./components/Achievements";
 import { Contact } from "./components/Contact";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { Menu, X } from "lucide-react";
@@ -183,7 +182,6 @@ export default function App() {
       <main className="pt-16">
         <Home theme={theme} scrollToSection={scrollToSection} />
         <About theme={theme} />
-        <Achievements theme={theme} />
         <Contact theme={theme} />
       </main>
     </div>

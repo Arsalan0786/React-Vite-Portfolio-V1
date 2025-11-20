@@ -1,11 +1,18 @@
 import { motion } from 'motion/react';
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Instagram, Clock } from 'lucide-react';
+import { useState, FormEvent } from 'react';
 
 interface ContactProps {
   theme: 'light' | 'dark';
 }
 
 export function Contact({ theme }: ContactProps) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
   const contactInfo = [
     {
       icon: Mail,
@@ -33,6 +40,55 @@ export function Contact({ theme }: ContactProps) {
     { icon: Twitter, label: 'Twitter', link: 'https://twitter.com/sheikharsalann' },
     { icon: Instagram, label: 'Instagram', link: 'https://instagram.com/sheikharsalan8146' }
   ];
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Basic validation
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setStatus('error');
+      setErrorMessage('Please fill in your name, email, and message.');
+      return;
+    }
+
+    setStatus('loading');
+    setErrorMessage('');
+
+    try {
+      // 1) Replace this URL with your actual Formspree endpoint
+      // After you create a form on Formspree, you'll get something like:
+      // https://formspree.io/f/abcdxyz
+      const FORMSPREE_ENDPOINT = 'https://formspree.io/f/meonrgjq';
+
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message. Please try again.');
+      }
+
+      setStatus('success');
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch (err) {
+      console.error(err);
+      setStatus('error');
+      setErrorMessage(
+        'Something went wrong while sending your message. Please try again or email me directly.'
+      );
+    }
+  };
 
   return (
     <section id="contact" className={`min-h-screen py-20 px-6 flex items-center ${
@@ -111,14 +167,17 @@ export function Contact({ theme }: ContactProps) {
               </p>
             </div>
 
-            {/* Note about contact form */}
-            <div className={`p-4 rounded-lg text-sm ${
-              theme === 'dark'
-                ? 'bg-zinc-800/50 border border-zinc-700/50'
-                : 'bg-zinc-100 border border-zinc-300/50'
-            }`}>
+            {/* Note about contact options */}
+            <div
+              className={`p-4 rounded-lg text-sm ${
+                theme === 'dark'
+                  ? 'bg-zinc-800/50 border border-zinc-700/50'
+                  : 'bg-zinc-100 border border-zinc-300/50'
+              }`}
+            >
               <p className={`${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'} italic`}>
-                Note: The send message form is currently not working. If you are interested in contacting me, please do so by clicking on my email address mentioned above.
+                You can either use the message form on the right or contact me directly via the email
+                link above.
               </p>
             </div>
           </motion.div>
@@ -165,11 +224,13 @@ export function Contact({ theme }: ContactProps) {
                 : 'bg-zinc-50 border border-zinc-200'
             }`}>
               <h3 className="text-2xl mb-6">Send a Message</h3>
-              <form className="space-y-4">
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div>
                   <input
                     type="text"
                     placeholder="Your Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className={`w-full px-4 py-3 rounded-lg transition-colors ${
                       theme === 'dark'
                         ? 'bg-zinc-800 border border-zinc-700 focus:border-blue-500'
@@ -181,6 +242,8 @@ export function Contact({ theme }: ContactProps) {
                   <input
                     type="email"
                     placeholder="Your Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className={`w-full px-4 py-3 rounded-lg transition-colors ${
                       theme === 'dark'
                         ? 'bg-zinc-800 border border-zinc-700 focus:border-blue-500'
@@ -192,6 +255,8 @@ export function Contact({ theme }: ContactProps) {
                   <textarea
                     placeholder="Your Message"
                     rows={4}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     className={`w-full px-4 py-3 rounded-lg transition-colors ${
                       theme === 'dark'
                         ? 'bg-zinc-800 border border-zinc-700 focus:border-blue-500'
@@ -201,14 +266,25 @@ export function Contact({ theme }: ContactProps) {
                 </div>
                 <button
                   type="submit"
+                  disabled={status === 'loading'}
                   className={`w-full px-6 py-3 rounded-lg transition-all ${
                     theme === 'dark'
                       ? 'bg-blue-500 hover:bg-blue-600 text-white'
                       : 'bg-blue-600 hover:bg-blue-700 text-white'
                   }`}
                 >
-                  Send Message
+                  {status === 'loading' ? 'Sending...' : 'Send Message'}
                 </button>
+                {status === 'success' && (
+                  <p className="text-sm text-green-500">
+                    Your message has been sent! I&apos;ll get back to you soon.
+                  </p>
+                )}
+                {status === 'error' && (
+                  <p className="text-sm text-red-500">
+                    {errorMessage || 'There was an error sending your message.'}
+                  </p>
+                )}
               </form>
             </div>
           </motion.div>
@@ -225,7 +301,7 @@ export function Contact({ theme }: ContactProps) {
           }`}
         >
           <p className={theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}>
-            © 2025 Arsalan. Built with React & Tailwind CSS.
+            © Sheikh Arsalan. 2025.
           </p>
         </motion.div>
       </div>
