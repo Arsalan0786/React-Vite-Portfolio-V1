@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Home } from "./components/Home";
 import { About } from "./components/About";
 import { Contact } from "./components/Contact";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { Menu, X } from "lucide-react";
+import { FitnessPage } from "./pages/FitnessPage";
 import faviconImage from 'figma:asset/7d4a521428c31495244b4f72864dfcf44774cd68.png';
 
 export default function App() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") as
@@ -43,13 +47,33 @@ export default function App() {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSectionInternal = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
       setMobileMenuOpen(false);
     }
   };
+
+  const scrollToSection = (sectionId: string) => {
+    if (location.pathname !== "/") {
+      navigate("/", { state: { targetSection: sectionId } });
+      setMobileMenuOpen(false);
+      return;
+    }
+    scrollToSectionInternal(sectionId);
+  };
+
+  useEffect(() => {
+    const targetSection = (location.state as { targetSection?: string } | null)?.targetSection;
+    if (location.pathname === "/" && targetSection) {
+      // Allow layout paint before scrolling
+      requestAnimationFrame(() => {
+        scrollToSectionInternal(targetSection);
+      });
+      navigate(location.pathname, { replace: true, state: null });
+    }
+  }, [location, navigate]);
 
   return (
     <div
@@ -88,7 +112,7 @@ export default function App() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <button
+              <button
               onClick={() => scrollToSection("home")}
               className={`transition-colors hover:${theme === "dark" ? "text-blue-400" : "text-blue-600"}`}
             >
@@ -179,10 +203,20 @@ export default function App() {
       </nav>
 
       {/* Main Content */}
-      <main className="pt-16">
-        <Home theme={theme} scrollToSection={scrollToSection} />
-        <About theme={theme} />
-        <Contact theme={theme} />
+      <main className="pt-16 min-h-[calc(100vh-4rem)]">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Home theme={theme} scrollToSection={scrollToSection} />
+                <About theme={theme} onNavigateToFitness={() => navigate("/fitness")} />
+                <Contact theme={theme} />
+              </>
+            }
+          />
+          <Route path="/fitness" element={<FitnessPage theme={theme} onNavigateHome={() => scrollToSection("about")} />} />
+        </Routes>
       </main>
     </div>
   );

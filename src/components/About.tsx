@@ -12,9 +12,10 @@ import { useState } from 'react';
 
 interface AboutProps {
   theme: 'light' | 'dark';
+  onNavigateToFitness?: () => void;
 }
 
-export function About({ theme }: AboutProps) {
+export function About({ theme, onNavigateToFitness }: AboutProps) {
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [selectedBlog, setSelectedBlog] = useState<any>(null);
 
@@ -40,25 +41,23 @@ export function About({ theme }: AboutProps) {
 
   const projects = [
     {
-      title: 'AI-Powered Analytics Platform',
-      description: 'Machine learning platform for real-time data analysis and predictive insights.',
-      tags: ['Python', 'TensorFlow', 'React'],
-      github: 'https://github.com',
-      image: 'https://images.unsplash.com/photo-1759322945173-76b604965b2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjb2RpbmclMjBzZXR1cHxlbnwxfHx8fDE3NjI0MDkwNzR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      detailedDescription: 'A comprehensive machine learning platform that provides real-time data analysis and predictive insights for businesses. The platform uses advanced AI algorithms to process large datasets and generate actionable insights.',
+      title: 'EduNinja  Dashboard',
+      description: 'EduNinja is an innovative educational platform designed to enhance learning experiences for middle-school students through interactive quizzes and educational games.',
+      tags: ['HTML', 'CSS', 'JS'],
+      github: 'https://github.com/Arsalan0786/Edu-Ninja',
+      image: 'https://images.unsplash.com/photo-1699347914988-c61ec13c99c5?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      detailedDescription: 'EduNinja is an innovative educational platform designed to enhance learning experiences for middle-school students through interactive quizzes and educational games. Aimed at making learning both engaging and effective, EduNinja focuses on core subjects like maths and science, providing a fun and interactive way for students',
       features: [
-        'Real-time data processing with Apache Kafka',
-        'Machine learning models built with TensorFlow',
-        'Interactive dashboards with React and D3.js',
-        'Scalable backend with microservices architecture',
-        'RESTful API for third-party integrations'
+        'Enhance learning experiences',
+        'Interactive quizzes and educational games',
       ],
-      liveUrl: 'https://demo.example.com',
-      date: 'October 2024',
-      githubUrl: 'https://github.com'
+      liveUrl: 'https://arsalan0786.github.io/Edu-Ninja/',
+      date: 'November 2024',
+      githubUrl: 'https://github.com/Arsalan0786/Edu-Ninja'
     },
+    
     {
-      title: 'Smart Fitness Tracker',
+      title: 'Smart Fitness Tracke (Under Production)',
       description: 'iOS app for personalized workout tracking and progress visualization.',
       tags: ['Swift', 'HealthKit', 'Firebase'],
       github: 'https://github.com',
@@ -76,23 +75,20 @@ export function About({ theme }: AboutProps) {
       githubUrl: 'https://github.com'
     },
     {
-      title: 'Web3 Portfolio Dashboard',
-      description: 'Decentralized application for tracking crypto portfolios with live market data.',
-      tags: ['React', 'Web3.js', 'Node.js'],
-      github: 'https://github.com',
-      image: 'https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkZXZlbG9wZXIlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzYyMzA5NTUyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      detailedDescription: 'A decentralized application (dApp) that allows users to track their cryptocurrency portfolios with real-time market data. Built on blockchain technology for security and transparency.',
+      title: 'Floods in India',
+      description: 'Website design to know the history of Floods in India.',
+      tags: ['HTML', 'CSS'],
+      github: 'https://github.com/Arsalan0786/FloodinIndia',
+      image: 'https://images.unsplash.com/photo-1485617359743-4dc5d2e53c89?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      detailedDescription: 'A website designed in such a way to make the history of floods in India easy to access to everyone',
       features: [
-        'Real-time cryptocurrency price tracking',
-        'Portfolio analytics and performance metrics',
-        'MetaMask wallet integration',
-        'Support for multiple blockchain networks',
-        'Secure transaction history'
+        'Real-time News related floods',
       ],
-      liveUrl: 'https://web3-portfolio.example.com',
-      date: 'August 2024',
-      githubUrl: 'https://github.com'
+      liveUrl: 'https://arsalan0786.github.io/FloodinIndia/',
+      date: 'December, 2024',
+      githubUrl: 'https://github.com/Arsalan0786/FloodinIndia'
     },
+    
   ];
 
   const experiences = [
@@ -118,6 +114,15 @@ export function About({ theme }: AboutProps) {
 
   const blogs = [
     {
+      title: 'AI and Machine Learning: A Beginner\'s Guide',
+      description: 'Understanding the fundamentals of AI and how to get started.',
+      preview: 'Artificial Intelligence and Machine Learning are transforming the world as we know it. In this beginner-friendly guide, I break down complex concepts into digestible pieces, explain the difference between AI and ML, and provide practical steps to start your journey in this exciting field. Perfect for developers and enthusiasts alike.',
+      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwbWFjaGluZSUyMGxlYXJuaW5nfGVufDF8fHx8MTc2MjQwOTA3NHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      date: 'October 2024',
+      category: 'Technology',
+      mediumUrl: 'https://medium.com/@sheikharsalan8146/ai-machine-learning-a-beginners-guide-in-simple-human-non-techy-terms-c6cdc07affbf'
+    },
+    {
       title: 'Building Modern Web Applications with React',
       description: 'Exploring the latest trends and best practices in React development.',
       preview: 'In this comprehensive guide, I dive deep into modern React development practices, covering everything from hooks and context to performance optimization and state management. Learn how to build scalable applications that stand the test of time.',
@@ -135,15 +140,7 @@ export function About({ theme }: AboutProps) {
       category: 'Fitness & Lifestyle',
       mediumUrl: 'https://medium.com/@sheikharsalan8146'
     },
-    {
-      title: 'AI and Machine Learning: A Beginner\'s Guide',
-      description: 'Understanding the fundamentals of AI and how to get started.',
-      preview: 'Artificial Intelligence and Machine Learning are transforming the world as we know it. In this beginner-friendly guide, I break down complex concepts into digestible pieces, explain the difference between AI and ML, and provide practical steps to start your journey in this exciting field. Perfect for developers and enthusiasts alike.',
-      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwbWFjaGluZSUyMGxlYXJuaW5nfGVufDF8fHx8MTc2MjQwOTA3NHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      date: 'October 2024',
-      category: 'Technology',
-      mediumUrl: 'https://medium.com/@sheikharsalan8146'
-    }
+    
   ];
 
   return (
@@ -343,20 +340,34 @@ export function About({ theme }: AboutProps) {
                   One-on-one coaching support
                 </li>
               </ul>
-              <a
-                href="https://instagram.com/sheikharsalan8146"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
-                  theme === 'dark'
-                    ? 'bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white'
-                    : 'bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white'
-                }`}
-              >
-                <Instagram size={20} />
-                Follow My Fitness Journey
-                <ExternalLink size={16} />
-              </a>
+              <div className="space-y-3">
+                <a
+                  href="https://instagram.com/sheikharsalan8146"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
+                    theme === 'dark'
+                      ? 'bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white'
+                      : 'bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white'
+                  }`}
+                >
+                  <Instagram size={20} />
+                  Follow My Fitness Journey
+                  <ExternalLink size={16} />
+                </a>
+                <button
+                  onClick={() => onNavigateToFitness?.()}
+                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-sm font-semibold transition-all border ${
+                    theme === 'dark'
+                      ? 'text-blue-300 border-blue-400 hover:bg-blue-500/10'
+                      : 'text-blue-600 border-blue-500 hover:bg-blue-50'
+                  }`}
+                >
+                  <Dumbbell size={20} />
+                  View Coaching Details
+                  <ExternalLink size={16} />
+                </button>
+              </div>
             </div>
             <div className="relative">
               <FitnessCarousel theme={theme} />
