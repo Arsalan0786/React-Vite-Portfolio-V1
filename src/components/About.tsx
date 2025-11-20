@@ -140,7 +140,15 @@ export function About({ theme, onNavigateToFitness }: AboutProps) {
       category: 'Fitness & Lifestyle',
       mediumUrl: 'https://medium.com/@sheikharsalan8146'
     },
-    
+    {
+      title: 'AI and Machine Learning: A Beginner\'s Guide',
+      description: 'Understanding the fundamentals of AI and how to get started.',
+      preview: 'Artificial Intelligence and Machine Learning are transforming the world as we know it. In this beginner-friendly guide, I break down complex concepts into digestible pieces, explain the difference between AI and ML, and provide practical steps to start your journey in this exciting field. Perfect for developers and enthusiasts alike.',
+      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwbWFjaGluZSUyMGxlYXJuaW5nfGVufDF8fHx8MTc2MjQwOTA3NHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      date: 'October 2024',
+      category: 'Technology',
+      mediumUrl: 'https://medium.com/@sheikharsalan8146'
+    }
   ];
 
   return (
