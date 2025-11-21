@@ -54,7 +54,7 @@ export function Home({ theme, scrollToSection }: HomeProps) {
             className="space-y-2"
           >
             <p className={`text-base sm:text-lg ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
-              Hello, I'm
+              Hello, I'm..
             </p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight">
               Sheikh Arsalan
