@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Github, Linkedin, Twitter, FileText } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, Twitter, FileText, BookOpen } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface HomeProps {
@@ -148,6 +148,20 @@ export function Home({ theme, scrollToSection }: HomeProps) {
               aria-label="Twitter"
             >
               <Twitter size={20} className="sm:w-6 sm:h-6" />
+            </a>
+            {/* Medium Link Added Below */}
+            <a
+              href="https://medium.com/@sheikharsalan8146" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`p-2 sm:p-3 rounded-lg transition-all ${
+                theme === 'dark'
+                  ? 'hover:bg-zinc-800'
+                  : 'hover:bg-zinc-100'
+              }`}
+              aria-label="Medium Blog"
+            >
+              <BookOpen size={20} className="sm:w-6 sm:h-6" />
             </a>
           </motion.div>
         </motion.div>
